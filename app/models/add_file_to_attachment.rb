@@ -1,0 +1,2 @@
+class AddFileToAttachment < ApplicationRecord
+end
