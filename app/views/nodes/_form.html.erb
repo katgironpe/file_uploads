@@ -1,12 +1,12 @@
-<%= form_for(node) do |f| %>
+<%= form_for(node, html: { multipart: true }) do |f| %>
   <% if node.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(node.errors.count, "error") %> prohibited this node from being saved:</h2>
 
       <ul>
-      <% node.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% node.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -14,6 +14,13 @@
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.fields_for :attachments do |f| %>
+      <%= f.label :file %>
+      <%= f.file_field :file %>
+    <% end %>
   </div>
 
   <div class="actions">

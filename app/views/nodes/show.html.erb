@@ -5,5 +5,12 @@
   <%= @node.name %>
 </p>
 
+<p>
+
+  <% @node.attachments.each do |attachment| %>
+    <%= link_to attachment.file_file_name, attachment.file.url, target: '_blank' %>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_node_path(@node) %> |
 <%= link_to 'Back', nodes_path %>

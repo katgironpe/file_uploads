@@ -1,5 +1,6 @@
 class NodesController < ApplicationController
   before_action :set_node, only: [:show, :edit, :update, :destroy]
+  before_action :build_attachments, only: [:update, :edit]
 
   # GET /nodes
   # GET /nodes.json
@@ -15,10 +16,12 @@ class NodesController < ApplicationController
   # GET /nodes/new
   def new
     @node = Node.new
+    2.times { @node.attachments.build }
   end
 
   # GET /nodes/1/edit
   def edit
+    1.times { @node.attachments.build }
   end
 
   # POST /nodes
@@ -62,13 +65,17 @@ class NodesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_node
-      @node = Node.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def node_params
-      params.require(:node).permit(:name)
-    end
+  def build_attachments
+    4.times { @node.attachments.build }
+  end
+
+  def set_node
+    @node = Node.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def node_params
+    params.require(:node).permit(:name, attachments_attributes: [:file])
+  end
 end
