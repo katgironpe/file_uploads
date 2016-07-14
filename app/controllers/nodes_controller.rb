@@ -21,13 +21,13 @@ class NodesController < ApplicationController
 
   # GET /nodes/1/edit
   def edit
-    1.times { @node.attachments.build }
   end
 
   # POST /nodes
   # POST /nodes.json
   def create
     @node = Node.new(node_params)
+    2.times { @node.attachments.build }
 
     respond_to do |format|
       if @node.save
@@ -67,7 +67,7 @@ class NodesController < ApplicationController
   private
 
   def build_attachments
-    4.times { @node.attachments.build }
+    1.times { @node.attachments.build }
   end
 
   def set_node
